@@ -3,7 +3,7 @@ import { FaYoutube } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import indian from "../assets/indian.jpg"
-import Ammex from "../assets/ammex.png";
+import Ammex from "../assets/Ammex.png";
 import Gpay from "../assets/Gpay.png";
 import Mastercard from "../assets/Mastercard.svg";
 import Visa from "../assets/visa.png";
