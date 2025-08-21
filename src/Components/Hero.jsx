@@ -98,10 +98,10 @@ function Hero() {
 
   return (
     <section className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="relative md:h-[90vh] h-screen w-full overflow-hidden">
+      <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
         <div
           ref={trackRef}
-          className="flex h-full will-change-transform"
+          className="flex h-full transition-transform duration-700 ease-out"
           style={{
             width: `${100 * total}%`,
               // changed sign here too
