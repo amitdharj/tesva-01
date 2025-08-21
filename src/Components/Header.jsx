@@ -36,8 +36,8 @@ function Header() {
       {/* Main Bar */}
       <div className="flex justify-between items-center px-6 md:px-10 py-4">
         <div className="flex items-center gap-2">
-          <img src="/tasva-logo.png" alt="TASVA" className="h-8" />
-          <span className="text-xl font-semibold text-yellow-700 tracking-wide">TASVA</span>
+          <img src="/tasva-logo.png" alt="Logo" className="h-8" />
+          <span className="text-xl font-semibold text-yellow-700 tracking-wide">Clothing</span>
         </div>
 
         <nav className="hidden md:flex gap-8 text-sm font-medium relative">

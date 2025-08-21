@@ -23,3 +23,8 @@ function Newsletter() {
 }
 
 export default Newsletter; 
+
+// git status
+// git add .
+//  git commit -m "hero"
+// git push origin main
