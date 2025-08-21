@@ -3,7 +3,7 @@ import './App.css'
 import Footer from "./Components/Footer.jsx";
 import Hero from "./Components/Hero.jsx";
 import CategoryTiles from "./Components/CategoryTiles.jsx";
-import Splitpromos from "./Components/Splitpromos.jsx";
+import SplitPromos from "./Components/SplitPromos.jsx";
 import Newsletter from "./Components/Newsletter.jsx";
 import CurrentlyTrending from "./Components/CurrentlyTrending.jsx";
 import Header from "./Components/Header.jsx";
@@ -21,7 +21,7 @@ function App() {
           <Hero />
           <CategoryTiles />
           <CurrentlyTrending />
-          <Splitpromos />
+          <SplitPromos />
           <Carousels />
           <Newsletter />
           <Footer />
