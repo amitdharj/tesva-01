@@ -3,10 +3,10 @@ import Groom from "../assets/grooms.jpeg"
 import Friends from "../assets/friends.png"
 
 
-
+//split
 
 // ----- Split Promo Banners -----
-function SplitPromos() {
+function Splitpromos() {
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-6 py-14 grid md:grid-cols-2 gap-6">
       <div className="relative h-[340px] md:h-[420px] overflow-hidden rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-gray-600">
@@ -29,4 +29,4 @@ function SplitPromos() {
   );
 }
 
-export default SplitPromos;
+export default Splitpromos;
