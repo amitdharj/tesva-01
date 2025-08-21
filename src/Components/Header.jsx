@@ -1,20 +1,11 @@
-import { useRef, useState, useEffect } from "react";
-import {
-    Search,
-    Heart,
-    User,
-    ShoppingBag,
-    ChevronDown,
-    ChevronLeft,
-    ChevronRight,
-    Menu,
-    X,
-} from "lucide-react";
+import { useRef, useState } from "react";
+import { Search, Heart, User, ShoppingBag, ChevronDown, ChevronLeft, ChevronRight, } from "lucide-react";
 import indian from "../assets/indian.jpg";
 import FriendsFamily from "../assets/Friends&Family.jpg";
 import HaldiMales from "../assets/HaldiMale.jpeg";
 
-// ...existing code...
+
+
 // small local data so the menu can render (replace with imported data if you have it)
 const weddingOccasions = [
   { id: 1, title: "Haldi" },
@@ -25,21 +16,10 @@ const weddingOccasions = [
   { id: 6, title: "Reception" },
 ];
 
+
 // ----- Header with Mega Menu -----
 function Header() {
   const [openMenu, setOpenMenu] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Close mobile menu when screen size changes to desktop
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white/95 backdrop-blur shadow-sm">
@@ -60,11 +40,10 @@ function Header() {
           <span className="text-xl font-semibold text-yellow-700 tracking-wide">TASVA</span>
         </div>
 
-        {/* keep top nav visually for reference but hide on desktop in favor of right sidebar if needed
-            (desktop sidebar will show the lists). This nav remains for small screens >= md if you want. */}
         <nav className="hidden md:flex gap-8 text-sm font-medium relative">
           <a className="hover:text-yellow-700" href="#">New Arrival</a>
 
+          
           {/* wrapper handles hover + click toggle and keeps menu open while pointer is inside */}
           <div
             className="relative"
@@ -107,7 +86,9 @@ function Header() {
             )}
           </div>
 
-          {/* Clothing: full-screen width dropdown that stays while mouse is inside */}
+
+
+            {/* Clothing: full-screen width dropdown that stays while mouse is inside */}
           <div
             className="relative"
             tabIndex={0}
@@ -173,6 +154,8 @@ function Header() {
             )}
           </div>
 
+
+          
           <a className="hover:text-yellow-700" href="#">Accessories</a>
           <a className="hover:text-yellow-700" href="#">Blog</a>
         </nav>
@@ -182,134 +165,26 @@ function Header() {
           <Heart className="w-5 h-5" />
           <User className="w-5 h-5" />
           <ShoppingBag className="w-5 h-5" />
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Sidebar */}
-      <div className={`
-        fixed inset-y-0 right-0 w-[80%] max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50
-        ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
-        md:hidden
-      `}>
-        <div className="h-full flex flex-col">
-          {/* Sidebar Header */}
-          <div className="p-4 flex justify-between items-center border-b">
-            <span className="font-semibold">Menu</span>
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 hover:bg-gray-100 rounded-full"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Sidebar Navigation */}
-          <nav className="flex-1 overflow-y-auto">
-            <div className="flex flex-col py-2">
-              <a href="#" className="px-6 py-4 hover:bg-gray-50 text-sm font-medium">
-                New Arrival
-              </a>
-              <button 
-                className="px-6 py-4 hover:bg-gray-50 text-sm font-medium text-left flex justify-between items-center"
-                onClick={() => setOpenMenu(openMenu === "mobile-wedding" ? null : "mobile-wedding")}
-              >
-                Wedding
-                <ChevronDown className={`w-4 h-4 transform transition-transform ${openMenu === "mobile-wedding" ? "rotate-180" : ""}`} />
-              </button>
-              {openMenu === "mobile-wedding" && (
-                <div className="bg-gray-50 py-2">
-                  {weddingOccasions.map(o => (
-                    <a
-                      key={o.id}
-                      href="#"
-                      className="px-8 py-3 hover:bg-gray-100 text-sm block"
-                    >
-                      {o.title}
-                    </a>
-                  ))}
-                </div>
-              )}
-              <a href="#" className="px-6 py-4 hover:bg-gray-50 text-sm font-medium">
-                Clothing
-              </a>
-              <a href="#" className="px-6 py-4 hover:bg-gray-50 text-sm font-medium">
-                Accessories
-              </a>
-              <a href="#" className="px-6 py-4 hover:bg-gray-50 text-sm font-medium">
-                Blog
-              </a>
-            </div>
-          </nav>
-
-          {/* Sidebar Footer */}
-          <div className="border-t p-4">
-            <div className="flex flex-col gap-4">
-              <a href="#" className="text-sm font-medium hover:text-yellow-700">Find Stores</a>
-              <a href="#" className="text-sm font-medium hover:text-yellow-700">Track Orders</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 md:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Desktop Right Sidebar (lists shown here on PC) */}
-      <div className="hidden md:flex flex-col fixed right-0 top-[116px] h-[calc(100vh-116px)] w-72 bg-white border-l shadow-sm p-4 z-40">
-        <nav className="flex-1 overflow-y-auto">
-          <a href="#" className="block px-3 py-2 rounded hover:bg-gray-50 text-sm font-medium">New Arrival</a>
-
-          <div className="mt-2">
-            <button
-              className="w-full text-left px-3 py-2 rounded hover:bg-gray-50 flex justify-between items-center"
-              onClick={() => setOpenMenu(openMenu === "sidebar-wedding" ? null : "sidebar-wedding")}
-            >
-              Wedding
-              <ChevronDown className={`w-4 h-4 transition-transform ${openMenu === "sidebar-wedding" ? "rotate-180" : ""}`} />
-            </button>
-
-            {openMenu === "sidebar-wedding" && (
-              <div className="mt-2">
-                <ul className="space-y-1">
-                  {weddingOccasions.map(o => (
-                    <li key={o.id}>
-                      <a href="#" className="block px-4 py-2 text-sm rounded hover:bg-gray-100">{o.title}</a>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-3 grid grid-cols-1 gap-2">
-                  <img src={FriendsFamily} alt="Friends & Family" className="w-full h-28 object-cover rounded" />
-                  <img src={HaldiMales} alt="Haldi" className="w-full h-28 object-cover rounded" />
-                </div>
-              </div>
-            )}
-          </div>
-
-          <a href="#" className="block px-3 py-2 rounded hover:bg-gray-50 text-sm font-medium mt-3">Clothing</a>
-          <a href="#" className="block px-3 py-2 rounded hover:bg-gray-50 text-sm font-medium mt-1">Accessories</a>
-          <a href="#" className="block px-3 py-2 rounded hover:bg-gray-50 text-sm font-medium mt-1">Blog</a>
-        </nav>
-
-        <div className="mt-4 border-t pt-3">
-          <a href="#" className="block text-sm font-medium hover:text-yellow-700">Find Stores</a>
-          <a href="#" className="block text-sm font-medium hover:text-yellow-700 mt-2">Track Orders</a>
         </div>
       </div>
     </header>
   );
 }
 
+
+
 export default Header;
+
+
+
+
+/*
+Notes:
+- Replace image src paths with real images. For quick testing, drop files in /public and use the same names.
+- Tailwind utility `no-scrollbar` (used above) can be added by inserting the following CSS in your globals:
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+- This page is mobile-friendly and uses a spacer (padding) under the fixed header: `pt-[116px]` in <Hero/>. Adjust if your header height changes.
+*/

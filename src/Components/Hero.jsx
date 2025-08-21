@@ -101,7 +101,7 @@ function Hero() {
       <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
         <div
           ref={trackRef}
-          className="flex h-full transition-transform duration-700 ease-out"
+          className="flex h-full will-change-transform"
           style={{
             width: `${100 * total}%`,
               // changed sign here too
@@ -110,7 +110,14 @@ function Hero() {
         >
           {slides.map((slide, idx) => (
             <div key={`${slide.id}-${idx}`} className="flex-shrink-0 h-full relative" style={{ width: `${100 / total}%` }}>
-              <img src={slide.img} alt={slide.title} className="absolute inset-0 w-full  object-center" draggable="false" />
+              {/* image fills the slide height so overlay matches image area on all devices */}
+              <img
+                src={slide.img}
+                alt={slide.title}
+                loading="lazy"
+                draggable="false"
+                className="absolute inset-0 w-full h-full object-cover object-center md:object-[center_0%]"
+              />
             </div>
           ))}
         </div>
