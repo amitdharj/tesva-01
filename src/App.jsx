@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Footer from "./Components/Footer.jsx";
 import Hero from "./Components/Hero.jsx";
@@ -15,7 +15,7 @@ import Cart from "./Pages/Cart";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="pt-[80px]">
         <Header />
         <Routes>
@@ -39,6 +39,6 @@ export default function App() {
         </Routes>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
