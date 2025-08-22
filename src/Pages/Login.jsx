@@ -13,7 +13,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-5xl w-full flex">
+      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-4xl w-full flex">
         
         {/* Left Side - Illustration */}
         <div className="flex-1 bg-gradient-to-br from-purple-100 via-pink-50 to-orange-50 p-12 flex items-center justify-center relative overflow-hidden">
@@ -92,7 +92,7 @@ export default function LoginPage() {
           <div className="mb-8">
             <h1 className="text-2xl font-light text-gray-600 mb-2">Welcome to</h1>
             <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
-              Design School
+             Company
             </h2>
           </div>
           
