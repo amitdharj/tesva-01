@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Search, Heart, User, ShoppingBag, ChevronDown, ChevronLeft, ChevronRight, } from "lucide-react";
+import { Search, Heart, User, ShoppingBag, ChevronDown, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import indian from "../assets/indian.jpg";
 import FriendsFamily from "../assets/Friends&Family.jpg";
 import HaldiMales from "../assets/HaldiMale.jpeg";
@@ -20,6 +20,7 @@ const weddingOccasions = [
 // ----- Header with Mega Menu -----
 function Header() {
   const [openMenu, setOpenMenu] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-white/95 backdrop-blur shadow-sm">
@@ -34,16 +35,24 @@ function Header() {
       </div>
 
       {/* Main Bar */}
-      <div className="flex justify-between items-center px-6 md:px-10 py-4">
+      <div className="flex justify-between items-center px-4 md:px-10 py-4">
         <div className="flex items-center gap-2">
+          {/* Mobile hamburger on left (opens left-side menu) */}
+          <button
+            className="md:hidden p-2 mr-1"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+
           <img src="/tasva-logo.png" alt="Logo" className="h-8" />
-          <span className="text-xl font-semibold text-yellow-700 tracking-wide">Clothing</span>
+          <span className="text-xl font-semibold text-yellow-700 tracking-wide hidden sm:inline">Clothing</span>
         </div>
 
         <nav className="hidden md:flex gap-8 text-sm font-medium relative">
           <a className="hover:text-yellow-700" href="#">New Arrival</a>
 
-          
           {/* wrapper handles hover + click toggle and keeps menu open while pointer is inside */}
           <div
             className="relative"
@@ -75,7 +84,7 @@ function Header() {
                   </ul>
                 </div>
                 <div>
-                  <img src= {FriendsFamily} alt="Friends & Family" className="w-full h-72 object-cover rounded-xl" />
+                  <img src={FriendsFamily} alt="Friends & Family" className="w-full h-72 object-cover rounded-xl" />
                   <p className="text-center mt-3 text-sm">For Friends & Family</p>
                 </div>
                 <div>
@@ -86,9 +95,7 @@ function Header() {
             )}
           </div>
 
-
-
-            {/* Clothing: full-screen width dropdown that stays while mouse is inside */}
+          {/* Clothing: full-screen width dropdown that stays while mouse is inside */}
           <div
             className="relative"
             tabIndex={0}
@@ -154,8 +161,6 @@ function Header() {
             )}
           </div>
 
-
-          
           <a className="hover:text-yellow-700" href="#">Accessories</a>
           <a className="hover:text-yellow-700" href="#">Blog</a>
         </nav>
@@ -167,11 +172,68 @@ function Header() {
           <ShoppingBag className="w-5 h-5" />
         </div>
       </div>
+
+      {/* Mobile left sidebar */}
+      <div
+        className={`
+          fixed inset-y-0 left-0 w-[80%] max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+          md:hidden
+        `}
+      >
+        <div className="h-full flex flex-col">
+          {/* Sidebar Header */}
+          <div className="p-4 flex items-center justify-between border-b">
+            <div className="flex items-center gap-2">
+              <img src="/tasva-logo.png" alt="Logo" className="h-8" />
+              <span className="font-semibold">Menu</span>
+            </div>
+            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 hover:bg-gray-100 rounded-full">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Sidebar Navigation */}
+          <nav className="flex-1 overflow-y-auto no-scrollbar">
+            <a href="#" className="block px-6 py-4 hover:bg-gray-50 text-sm font-medium">New Arrival</a>
+
+            <button
+              className="w-full text-left px-6 py-4 hover:bg-gray-50 text-sm font-medium flex justify-between items-center"
+              onClick={() => setOpenMenu(openMenu === "mobile-wedding" ? null : "mobile-wedding")}
+            >
+              Wedding
+              <ChevronDown className={`w-4 h-4 transition-transform ${openMenu === "mobile-wedding" ? "rotate-180" : ""}`} />
+            </button>
+            {openMenu === "mobile-wedding" && (
+              <div className="bg-gray-50">
+                {weddingOccasions.map(o => (
+                  <a key={o.id} href="#" className="block px-8 py-3 hover:bg-gray-100 text-sm">{o.title}</a>
+                ))}
+              </div>
+            )}
+
+            <a href="#" className="block px-6 py-4 hover:bg-gray-50 text-sm font-medium">Clothing</a>
+            <a href="#" className="block px-6 py-4 hover:bg-gray-50 text-sm font-medium">Accessories</a>
+            <a href="#" className="block px-6 py-4 hover:bg-gray-50 text-sm font-medium">Blog</a>
+          </nav>
+
+          <div className="border-t p-4">
+            <a href="#" className="block text-sm font-medium hover:text-yellow-700">Find Stores</a>
+            <a href="#" className="block text-sm font-medium hover:text-yellow-700 mt-2">Track Orders</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Overlay for mobile menu */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 md:hidden z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </header>
   );
 }
-
-
 
 export default Header;
 
