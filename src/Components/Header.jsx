@@ -176,12 +176,13 @@ function Header() {
       {/* Mobile left sidebar */}
       <div
         className={`
-          fixed inset-y-0 left-0 w-[80%] max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50
+          fixed left-0 w-[80%] max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50
+          top-[64px] h-[calc(100vh-64px)]
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
           md:hidden
         `}
       >
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col">-
           {/* Sidebar Header */}
           <div className="p-4 flex items-center justify-between border-b">
             <div className="flex items-center gap-2">
@@ -227,7 +228,7 @@ function Header() {
       {/* Overlay for mobile menu */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 md:hidden z-40"
+          className="fixed left-0 right-0 top-[64px] bottom-0 bg-black/50 md:hidden z-40"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
