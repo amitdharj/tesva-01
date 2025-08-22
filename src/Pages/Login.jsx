@@ -13,10 +13,9 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-4xl w-full flex">
-        
-        {/* Left Side - Illustration */}
-        <div className="flex-1 bg-gradient-to-br from-purple-100 via-pink-50 to-orange-50 p-12 flex items-center justify-center relative overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
+        {/* Left Side - Illustration (hidden on small screens) */}
+        <div className="hidden md:flex flex-1 bg-gradient-to-br from-purple-100 via-pink-50 to-orange-50 p-12 items-center justify-center relative overflow-hidden">
           {/* Background decorative elements */}
           <div className="absolute top-20 left-20 w-16 h-16 bg-pink-200 rounded-full opacity-60"></div>
           <div className="absolute top-32 right-16 w-12 h-12 bg-purple-200 rounded-full opacity-50"></div>
@@ -88,7 +87,7 @@ export default function LoginPage() {
         </div>
         
         {/* Right Side - Login Form */}
-        <div className="flex-1 p-12 flex flex-col justify-center max-w-md">
+        <div className="flex-1 p-8 md:p-12 flex flex-col justify-center w-full max-w-md mx-auto">
           <div className="mb-8">
             <h1 className="text-2xl font-light text-gray-600 mb-2">Welcome to</h1>
             <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
