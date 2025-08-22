@@ -3,6 +3,7 @@ import { Search, Heart, User, ShoppingBag, ChevronDown, ChevronLeft, ChevronRigh
 import indian from "../assets/indian.jpg";
 import FriendsFamily from "../assets/Friends&Family.jpg";
 import HaldiMales from "../assets/HaldiMale.jpeg";
+import { Link } from "react-router-dom";
 
 
 
@@ -166,10 +167,10 @@ function Header() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <Search className="w-5 h-5" />
-          <Heart className="w-5 h-5" />
-          <User className="w-5 h-5" />
-          <ShoppingBag className="w-5 h-5" />
+          <Link to="/search" aria-label="Search"><Search className="w-5 h-5" /></Link>
+          <Link to="/wishlist" aria-label="Wishlist"><Heart className="w-5 h-5" /></Link>
+          <Link to="/login" aria-label="Login"><User className="w-5 h-5" /></Link>
+          <Link to="/cart" aria-label="Cart"><ShoppingBag className="w-5 h-5" /></Link>
         </div>
       </div>
 
