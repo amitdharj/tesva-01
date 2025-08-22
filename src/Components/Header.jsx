@@ -48,7 +48,7 @@ function Header() {
           </button>
 
           <img src="/tasva-logo.png" alt="Logo" className="h-8" />
-          <span className="text-xl font-semibold text-yellow-700 tracking-wide hidden sm:inline">Clothing</span>
+          <a href="/"   className="text-xl font-semibold text-yellow-700 tracking-wide hidden sm:inline">Clothing</a>
         </div>
 
         <nav className="hidden md:flex gap-8 text-sm font-medium relative">
