@@ -1,141 +1,210 @@
-import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import newhero from "../assets/new.webp";
-import accessoriees from "../assets/accere.webp";
-import Kurti from "../assets/kurti_girls.webp";
+import { useState, useRef, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import kurti_girls from "../assets/kurti_girls.webp"
 
-const heroSlides = [
-  { id: 1, img: newhero, title: "The Wedding Edit", subtitle: "Regal silhouettes, crafted for celebrations", cta: "Shop Wedding" },
-  { id: 2, img: accessoriees, title: "Festive New Arrivals", subtitle: "Luxurious fabrics. Modern details.", cta: "Explore New In" },
-  { id: 3, img: Kurti, title: "Accessories", subtitle: "Finish the look with finesse", cta: "Shop Accessories" },
-];
 
-// ----- Hero Carousel (infinite loop using clones) -----
-function Hero() {
-  const slidesCount = heroSlides.length;
-  // build slides with clones: [last, ...slides, first]
-  const slides = [heroSlides[slidesCount - 1], ...heroSlides, heroSlides[0]];
-  const total = slides.length; // slidesCount + 2
-
-  const [index, setIndex] = useState(1); // start at first real slide (index=1)
+export default function StaticBackgroundCarousel() {
+  const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const trackRef = useRef(null);
-  const intervalRef = useRef(null);
-  const isHovering = useRef(false);
-  const transitioning = useRef(false);
 
-  const goTo = (nextIndex, animate = true) => {
-    const track = trackRef.current;
-    if (!track) return;
-    transitioning.current = animate;
-    track.style.transition = animate ? "transform 1000ms cubic-bezier(.17,.67,.5,.96)" : "none";
-    const percent = -(nextIndex * (100 / total));
-    track.style.transform = `translate3d(${percent}%,0,0)`;
-    setIndex(nextIndex);
-  };
+  // Sample slides data
+  const slides = [
+    {
+      id: 1,
+      img: kurti_girls,
+      title: "Mountain Adventure",
+      subtitle: "Discover breathtaking peaks and valleys",
+      cta: "Explore Now"
+    },
+    {
+      id: 2,
+      img: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=600&fit=crop",
+      title: "Forest Escape",
+      subtitle: "Find peace in nature's embrace",
+      cta: "Learn More"
+    },
+    {
+      id: 3,
+      img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      title: "Ocean Views",
+      subtitle: "Experience coastal beauty",
+      cta: "Book Now"
+    },
+    {
+      id: 4,
+      img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      title: "Desert Journey",
+      subtitle: "Adventure awaits in golden sands",
+      cta: "Discover"
+    },
+    {
+      id: 4,
+      img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      title: "Desert Journey",
+      subtitle: "Adventure awaits in golden sands",
+      cta: "Discover"
+    }
+  ];
 
-  const next = () => {
-    if (transitioning.current) return; // avoid spamming while animating
-    goTo(index + 1, true);
-  };
-  const prev = () => {
-    if (transitioning.current) return;
-    goTo(index - 1, true);
-  };
+  const total = slides.length;
+  const s = slides[index];
 
-  // autoplay
+  const next = () => setIndex((index + 1) % total);
+  const prev = () => setIndex(index === 0 ? total - 1 : index - 1);
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  // Auto-play functionality
   useEffect(() => {
-    const start = () => {
-      if (intervalRef.current) return;
-      intervalRef.current = setInterval(() => {
-        if (!isHovering.current) next();
-      }, 2400);
-    };
-    start();
-    return () => {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    };
-  }, [index]); // index included only to keep closure fresh
-
-  // handle transitionend to snap when we're on cloned slides
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const onEnd = () => {
-      transitioning.current = false;
-      // if moved to cloned last (index === total - 1) -> snap to 1 (first real) without animation
-      if (index === total - 1) {
-        track.style.transition = "none";
-        const percent = -(1 * (100 / total));   // positive
-        track.style.transform = `translate3d(${percent}%,0,0)`;
-        setIndex(1);
-      }
-      // if moved to cloned first (index === 0) -> snap to slidesCount (last real)
-      if (index === 0) {
-        track.style.transition = "none";
-        const percent = -(slidesCount * (100 / total));  //positive
-        track.style.transform = `translate3d(${percent}%,0,0)`;
-        setIndex(slidesCount);
-      }
-    };
-    track.addEventListener("transitionend", onEnd);
-    return () => track.removeEventListener("transitionend", onEnd);
-  }, [index, slidesCount, total]);
-
-  // initialize position (no animation)
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.transition = "none";
-    const percent = -(1 * (100 / total));  // positive
-    track.style.transform = `translate3d(${percent}%,0,0)`;
-  }, [total]);
-
-  const handleMouseEnter = () => (isHovering.current = true);
-  const handleMouseLeave = () => (isHovering.current = false);
-
-  const s = heroSlides[(index - 1 + slidesCount) % slidesCount];
+    if (!isHovered) {
+      const interval = setInterval(next, 2500);
+      return () => clearInterval(interval);
+    }
+  }, [index, isHovered]);
 
   return (
-    <section className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <section 
+      className="relative" 
+      onMouseEnter={handleMouseEnter} 
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: '1200px' }}
+    >
+      {/* Static Background */}
+      {/* <div 
+        className="absolute inset-0 h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full"
+        style={{
+          backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      /> */}
+
+      {/* Alternative static background options - uncomment one of these instead of the gradient above */}
+      
+      <div 
+        className="absolute inset-0 h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+     
+
       <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
-        <div
-          ref={trackRef}
-          className="flex h-full will-change-transform"
-          style={{
-            width: `${100 * total}%`,
-              // changed sign here too
-            transform: `translate3d(-${index * (100 / total)}%,0,0)`,
-          }}
+        {/* Circular Sliding Images Container */}
+        <div className="absolute inset-0 flex items-center justify-center perspective-2000">
+          <div className="relative w-full max-w-8xl h-3/4 flex items-center justify-center">
+            {slides.map((slide, idx) => {
+              const position = (idx - index + total) % total;
+              const isActive = position === 0;
+              const isNext = position === 1;
+              const isPrev = position === total - 1;
+              const isVisible = position <= 2 || position >= total - 2;
+              
+              // Calculate circular positioning
+              const angle = (position * 360) / total;
+              const radius = 300;
+              const x = Math.sin((angle * Math.PI) / 180) * radius;
+              const z = Math.cos((angle * Math.PI) / 180) * radius;
+              const scale = isActive ? 1 : isNext || isPrev ? 0.7 : 0.6;
+              const opacity = isActive ? 1 : isNext || isPrev ? 0.8 : 0.5;
+              const rotateY = isActive ? 0 : position < total / 2 ? -25 : 25;
+              
+              return (
+                <div
+                  key={`${slide.id}-${idx}`}
+                  className={`absolute transition-all duration-1000 ease-out cursor-pointer ${
+                    isVisible ? 'block' : 'hidden'
+                  }`}
+                  style={{
+                    transform: `
+                      translateX(${x}px) 
+                      translateZ(${z}px) 
+                      rotateY(${rotateY}deg) 
+                      scale(${scale})
+                    `,
+                    opacity: opacity,
+                    zIndex: isActive ? 30 : isNext || isPrev ? 20 : 10,
+                    transformStyle: 'preserve-3d',
+                    transition: 'all 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                  }}
+                  onClick={() => setIndex(idx)}
+                >
+                  <div 
+                    className={`relative overflow-hidden shadow-2xl transition-all duration-800 ease-out ${
+                      isActive 
+                        ? 'w-96 h-72 rounded-3xl' 
+                        : 'w-72 h-52 rounded-2xl'
+                    }`}
+                  >
+                    <img
+                      src={slide.img}
+                      alt={slide.title}
+                      loading="lazy"
+                      draggable="false"
+                      className="w-full h-full object-cover transition-all duration-800 ease-out"
+                      style={{
+                        transform: isActive ? 'scale(1.1)' : 'scale(1)',
+                        filter: isActive ? 'brightness(1.1) contrast(1.1)' : 'brightness(0.9)'
+                      }}
+                    />
+                    
+                    
+
+                    {/* Glow effect for active slide */}
+                    {isActive && (
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 rounded-3xl blur-xl -z-10 animate-pulse"></div>
+                    )}
+                  </div>
+                  
+                  {/* Preview text for non-active slides */}
+                  {!isActive && (isNext || isPrev) && (
+                    <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 text-white text-center transition-all duration-500">
+                      <p className="text-sm font-medium opacity-80 drop-shadow-lg">{slide.title}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        
+
+        {/* Navigation Controls */}
+        <button 
+          onClick={prev} 
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg z-20 transition-all duration-300 hover:scale-110"
         >
-          {slides.map((slide, idx) => (
-            <div key={`${slide.id}-${idx}`} className="flex-shrink-0 h-full relative" style={{ width: `${100 / total}%` }}>
-              {/* image fills the slide height so overlay matches image area on all devices */}
-              <img
-                src={slide.img}
-                alt={slide.title}
-                loading="lazy"
-                draggable="false"
-                className="absolute inset-0 w-full h-full object-cover object-center md:object-[center_0%]"
-              />
-            </div>
+          <ChevronLeft size={24} className="text-gray-800" />
+        </button>
+        <button 
+          onClick={next} 
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg z-20 transition-all duration-300 hover:scale-110"
+        >
+          <ChevronRight size={24} className="text-gray-800" />
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-8 z-20">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setIndex(idx)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                idx === index 
+                  ? 'bg-white scale-125' 
+                  : 'bg-white/50 hover:bg-white/75'
+              }`}
+            />
           ))}
         </div>
-
-        {/* overlay + content */}
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4 pointer-events-none">
-          <h1 className="text-3xl md:text-5xl font-semibold drop-shadow">{s.title}</h1>
-          <p className="mt-3 md:mt-4 text-base md:text-lg opacity-90">{s.subtitle}</p>
-          <button className="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-3 rounded-full bg-white text-gray-900 hover:bg-yellow-100 transition pointer-events-auto">{s.cta}</button>
-        </div>
-
-        {/* controls */}
-        <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow z-10"><ChevronLeft /></button>
-        <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow z-10"><ChevronRight /></button>
       </div>
     </section>
   );
 }
-
-export default Hero;
