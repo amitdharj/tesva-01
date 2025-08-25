@@ -47,7 +47,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex pt-6 pb-20">
+    <div className="min-h-screen bg-gray-100 flex pt-6 pb-20 ">
       {/* Left Section - Purple Background with Phone */}
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 items-center justify-center relative overflow-hidden">
         {/* Decorative circles */}

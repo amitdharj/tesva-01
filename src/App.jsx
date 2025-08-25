@@ -13,6 +13,7 @@ import Wishlist from "./Pages/Wishlist";
 import Search from "./Pages/Search";
 import Cart from "./Pages/Cart";
 import SignupPage from "./Pages/Signup.jsx";
+import MostLoved from "./Components/Newpage.jsx";
 
 
 
@@ -31,7 +32,9 @@ export default function App() {
                 <CurrentlyTrending />
                 <SplitPromos />
                 <Carousels />
+                <MostLoved />s
                 <Newsletter />
+                
               </>
             }
           />
