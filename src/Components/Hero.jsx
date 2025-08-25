@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import kurti_girls from "../assets/kurti_girls.webp"
+import Kurti from "../assets/kurti_girls.webp"
+import Accer from "../assets/accere.webp"
+
 
 
 export default function StaticBackgroundCarousel() {
@@ -12,35 +14,35 @@ export default function StaticBackgroundCarousel() {
   const slides = [
     {
       id: 1,
-      img: kurti_girls,
+      img:"/new.webp",
       title: "Mountain Adventure",
       subtitle: "Discover breathtaking peaks and valleys",
       cta: "Explore Now"
     },
     {
       id: 2,
-      img: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=600&fit=crop",
+      img: Kurti,
       title: "Forest Escape",
       subtitle: "Find peace in nature's embrace",
       cta: "Learn More"
     },
     {
       id: 3,
-      img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      img: Accer,
       title: "Ocean Views",
       subtitle: "Experience coastal beauty",
       cta: "Book Now"
     },
     {
       id: 4,
-      img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      img: "/Fashion.webp",
       title: "Desert Journey",
       subtitle: "Adventure awaits in golden sands",
       cta: "Discover"
     },
     {
       id: 4,
-      img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      img: "/Mens_outfit.jpg",
       title: "Desert Journey",
       subtitle: "Adventure awaits in golden sands",
       cta: "Discover"
@@ -72,18 +74,21 @@ export default function StaticBackgroundCarousel() {
       style={{ perspective: '1200px' }}
     >
       {/* Static Background */}
-      {/* <div 
+      <div 
         className="absolute inset-0 h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full"
         style={{
-          backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundImage: 'url("/Outfit.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
-      /> */}
+      />
+
+
+      
 
       {/* Alternative static background options - uncomment one of these instead of the gradient above */}
-      
+{/*       
       <div 
         className="absolute inset-0 h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full"
         style={{
@@ -93,7 +98,7 @@ export default function StaticBackgroundCarousel() {
           backgroundRepeat: 'no-repeat'
         }}
       />
-     
+      */}
 
       <div className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] w-full overflow-hidden">
         {/* Circular Sliding Images Container */}
@@ -111,7 +116,7 @@ export default function StaticBackgroundCarousel() {
               const radius = 300;
               const x = Math.sin((angle * Math.PI) / 180) * radius;
               const z = Math.cos((angle * Math.PI) / 180) * radius;
-              const scale = isActive ? 1 : isNext || isPrev ? 0.7 : 0.6;
+              const scale = isActive ? 1 : isNext || isPrev ? 0.8 : 0.6;
               const opacity = isActive ? 1 : isNext || isPrev ? 0.8 : 0.5;
               const rotateY = isActive ? 0 : position < total / 2 ? -25 : 25;
               
