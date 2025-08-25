@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Kurti from "../assets/kurti_girls.webp"
 import Accer from "../assets/accere.webp"
-import Sangeet from "../assets/Sangeet.jpg"
+import Fashion from "../assets/Fashion.webp"
 
 
 
@@ -36,7 +36,7 @@ export default function StaticBackgroundCarousel() {
     },
     {
       id: 4,
-      img: Sangeet,
+      img: Fashion,
       title: "Desert Journey",
       subtitle: "Adventure awaits in golden sands",
       cta: "Discover"
