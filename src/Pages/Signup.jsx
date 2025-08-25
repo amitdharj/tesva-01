@@ -47,9 +47,9 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex pt-15 pl-32 pr-32 pb-40">
+    <div className="min-h-screen bg-gray-100 flex pt-6 pb-20">
       {/* Left Section - Purple Background with Phone */}
-      <div className="flex-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 items-center justify-center relative overflow-hidden">
         {/* Decorative circles */}
         <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-pink-400/20 rounded-full animate-bounce"></div>
@@ -85,7 +85,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right Section - Form */}
-      <div className="flex-1 bg-white flex items-center justify-center p-8">
+      <div className="flex-1 bg-white flex items-center justify-center p-6 sm:p-8 lg:p-12">
         <div className="w-full max-w-md">
           {/* Header */}
           <div className="text-center mb-8">
@@ -140,7 +140,7 @@ export default function SignupPage() {
           {/* Form */}
           <div className="space-y-4">
             {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   First Name
@@ -203,7 +203,7 @@ export default function SignupPage() {
             </div>
 
             {/* Password Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Password
