@@ -51,7 +51,7 @@ const CurrentlyTrending = () => {
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="w-full h-76 object-cover rounded-lg hover:scale-108 transition-transform duration-300 hover:shadow-sm shadow-gray-600"
+                    className="w-full h-76 object-cover rounded-lg hover:scale-108 transition-transform duration-600 hover:shadow-sm shadow-gray-600"
                   />
                   <div className="absolute bottom-4 left-4 text-white text-lg font-semibold">
                     {item.title}

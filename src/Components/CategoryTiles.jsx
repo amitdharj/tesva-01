@@ -46,7 +46,7 @@ function CategoryTiles() {
             onMouseEnter={() => setHoveredCategory(c.id)}
             onMouseLeave={() => setHoveredCategory(null)}
           >
-            <div className="aspect-[3/4] w-full overflow-hidden rounded-xl bg-gray-100 group-hover:scale-110 transition-transform duration-300 hover:shadow-md shadow-gray-400 relative">
+            <div className="aspect-[3/4] w-full overflow-hidden  bg-gray-200 group-hover:scale-110 transition-transform duration-700 hover:shadow-md shadow-gray-400 relative">
               {/* Default Image */}
               <img
                 src={c.img}

@@ -12,6 +12,9 @@ import Login from "./Pages/Login";
 import Wishlist from "./Pages/Wishlist";
 import Search from "./Pages/Search";
 import Cart from "./Pages/Cart";
+import SignupPage from "./Pages/Signup.jsx";
+
+
 
 export default function App() {
   return (
@@ -33,6 +36,8 @@ export default function App() {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/Signup" element={<SignupPage />} />
+          
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/search" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
