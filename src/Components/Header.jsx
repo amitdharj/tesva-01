@@ -47,8 +47,8 @@ function Header() {
             <Menu className="w-6 h-6" />
           </button>
 
-          <a href="/"><img src="/tasva-logo.png" alt="Logo" className="h-8" /></a>
-          <a href="/"   className="text-xl font-semibold text-yellow-700 tracking-wide hidden sm:inline">Clothing</a>
+          <a href="/"><img src="/pallHouse-logo.png" alt="Logo" className="h-8" /></a>
+          <a href="/"   className="text-xl font-semibold text-yellow-700 tracking-wide hidden sm:inline">Pall House</a>
         </div>
 
         <nav className="hidden md:flex gap-8 text-sm font-medium relative">

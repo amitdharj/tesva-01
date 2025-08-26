@@ -47,7 +47,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex pt-6 pb-20 ">
+    <div className="min-h-screen bg-gray-100 flex pt-6 pb-6 ">
       {/* Left Section - Purple Background with Phone */}
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 items-center justify-center relative overflow-hidden">
         {/* Decorative circles */}
@@ -85,7 +85,7 @@ export default function SignupPage() {
       </div>
 
       {/* Right Section - Form */}
-      <div className="flex-1 bg-white flex items-center justify-center p-6 sm:p-8 lg:p-12">
+      <div className="flex-1 bg-white flex items-center justify-center p-4 sm:p-8 lg:p-12">
         <div className="w-full max-w-md">
           {/* Header */}
           <div className="text-center mb-8">

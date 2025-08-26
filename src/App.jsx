@@ -32,7 +32,7 @@ export default function App() {
                 <CurrentlyTrending />
                 <SplitPromos />
                 <Carousels />
-                <MostLoved />s
+                <MostLoved />
                 <Newsletter />
                 
               </>
@@ -50,3 +50,7 @@ export default function App() {
     </HashRouter>
   );
 }
+
+
+
+
